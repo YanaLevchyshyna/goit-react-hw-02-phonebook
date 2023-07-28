@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
-import { FormEl, LabelName, InputName, AddButton } from './Form.style';
+import {
+  FormEl,
+  LabelName,
+  InputName,
+  AddContactButton,
+  Title,
+} from './Form.style';
 
 class Form extends Component {
-  nameInputId = nanoid();
-
-  state = { name: '' };
+  state = { name: '', number: '' };
 
   // Відповідає за оновлення стану
   handleChange = e => {
@@ -21,44 +25,51 @@ class Form extends Component {
     this.props.onSubmit(this.state);
 
     console.log('this state', this.state);
+
     this.reset();
   };
 
   reset = () => {
-    this.setState({ name: '' });
+    this.setState({ name: '', number: '' });
   };
 
   render() {
-    const { name } = this.state;
+    const { name, number } = this.state;
 
     return (
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <h1>Phonebook</h1>
+      <div>
+        <Title>Phonebook</Title>
 
         <FormEl onSubmit={this.handleSubmit}>
-          <LabelName htmlFor={this.nameInputId}>
+          <LabelName htmlFor={name}>
             Name
             <InputName
-              id={this.nameInputId}
               type="text"
               placeholder="Enter name"
               name="name"
               value={name}
               onChange={this.handleChange}
-              //   pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-              title="Name may contain only letters, apostrophe, 
-          dash and spaces. For example Adrian, Jacob Mercer, 
+              title="Name may contain only letters, apostrophe,
+          dash and spaces. For example Adrian, Jacob Mercer,
           Charles de Batz de Castelmore d'Artagnan"
               required
             />
           </LabelName>
-          <AddButton type="submit">Add contact</AddButton>
+
+          <LabelName htmlFor={number}>
+            Number
+            <InputName
+              placeholder="Enter number"
+              type="tel"
+              name="number"
+              value={number}
+              onChange={this.handleChange}
+              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+              required
+            />
+          </LabelName>
+          <AddContactButton type="submit">Add contact</AddContactButton>
         </FormEl>
       </div>
     );
