@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
 import {
+  FormWrapper,
   FormEl,
   LabelName,
   InputName,
   AddContactButton,
-  Title,
 } from './Form.style';
 
 class Form extends Component {
@@ -16,14 +16,14 @@ class Form extends Component {
   handleChange = e => {
     const { name, value } = e.currentTarget;
 
-    this.setState({ [name]: value, id: 'id' + nanoid() });
+    this.setState({ [name]: value });
   };
 
   // Викликається під час відправлення форми
   handleSubmit = e => {
     e.preventDefault();
-    this.props.onSubmit(this.state);
-
+    const newContact = { ...this.state, id: 'id' + nanoid() };
+    this.props.onSubmit(newContact);
     console.log('this state', this.state);
 
     this.reset();
@@ -37,9 +37,7 @@ class Form extends Component {
     const { name, number } = this.state;
 
     return (
-      <div>
-        <Title>Phonebook</Title>
-
+      <FormWrapper>
         <FormEl onSubmit={this.handleSubmit}>
           <LabelName htmlFor={name}>
             Name
@@ -49,6 +47,7 @@ class Form extends Component {
               name="name"
               value={name}
               onChange={this.handleChange}
+              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
               title="Name may contain only letters, apostrophe,
           dash and spaces. For example Adrian, Jacob Mercer,
           Charles de Batz de Castelmore d'Artagnan"
@@ -71,7 +70,7 @@ class Form extends Component {
           </LabelName>
           <AddContactButton type="submit">Add contact</AddContactButton>
         </FormEl>
-      </div>
+      </FormWrapper>
     );
   }
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Form from './Form/Form';
 import { ContactsList } from './ContactsList/ContactsList';
 import { Filter } from './Filter/Filter';
+import { Title } from './App.styled';
 
 class App extends Component {
   state = {
@@ -15,15 +16,22 @@ class App extends Component {
   };
 
   onAddContact = newContact => {
-    this.state.contacts.filter(contactName =>
-      contactName.name.toLowerCase().trim() ===
-        newContact.name.toLowerCase().trim() ||
-      contactName.number.trim() === newContact.number.trim()
-        ? alert(`${contactName.name} is already in contacts`)
-        : this.setState(prevState => {
-            return { contacts: [...prevState.contacts, newContact] };
-          })
+    const { contacts } = this.state;
+
+    const contactIsAdded = contacts.find(
+      cont =>
+        cont.name.toLowerCase().trim() ===
+          newContact.name.toLowerCase().trim() ||
+        cont.number.trim() === newContact.number.trim()
     );
+
+    if (contactIsAdded) {
+      alert(`${newContact.name} is already in contacts`);
+    } else {
+      this.setState(({ contacts }) => {
+        return { contacts: [newContact, ...contacts] };
+      });
+    }
   };
 
   // Відповідає за оновлення стану list by search
@@ -53,6 +61,7 @@ class App extends Component {
 
     return (
       <div>
+        <Title>Phonebook</Title>
         <Form onSubmit={this.onAddContact} />
         <Filter value={filter} onChange={this.onSearchFieldChange} />
         <ContactsList

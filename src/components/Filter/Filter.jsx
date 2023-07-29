@@ -1,10 +1,10 @@
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
-import { LabelSearch, InputSearch } from './Filter.styled';
+import { FilterWrapp, LabelSearch, InputSearch } from './Filter.styled';
 
 export const Filter = ({ value, onChange }) => {
   return (
-    <>
+    <FilterWrapp>
       <LabelSearch htmlFor={'id' + nanoid()}>
         Find contacts by name
         <InputSearch
@@ -16,7 +16,7 @@ export const Filter = ({ value, onChange }) => {
           onChange={onChange}
         />
       </LabelSearch>
-    </>
+    </FilterWrapp>
   );
 };
 

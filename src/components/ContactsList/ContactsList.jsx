@@ -1,23 +1,29 @@
 import PropTypes from 'prop-types';
 import { BsXCircleFill } from 'react-icons/bs';
+import {
+  ContactsListWrapp,
+  List,
+  ListItem,
+  ContactsListBtn,
+} from './ContactsList.styled';
 
 export const ContactsList = ({ contacts, onDelete }) => {
   return (
-    <>
-      <ul>
+    <ContactsListWrapp>
+      <List>
         {contacts.map(({ name, number, id }) => {
           return (
-            <li key={id}>
+            <ListItem key={id}>
               <span>{name}: </span>
               <span>{number}</span>
-              <button type="button" onClick={() => onDelete(id)}>
+              <ContactsListBtn type="button" onClick={() => onDelete(id)}>
                 <BsXCircleFill size="16" />
-              </button>
-            </li>
+              </ContactsListBtn>
+            </ListItem>
           );
         })}
-      </ul>
-    </>
+      </List>
+    </ContactsListWrapp>
   );
 };
 

@@ -1,13 +1,17 @@
 export const theme = {
   colors: {
-    button: '#1e3c72',
+    button: ' #f6f6f6',
     buttonHover: '#FFF',
     borderColor: '#1e3c72',
-    primary: '#c6cfff',
-    secondary: '#2a5298',
+    primary: '#f6f6f6',
+    secondary: '#e5e7eb',
     accent: '#4DA0B0',
+    placeHolder: '#212529',
+    label: '#bbbdbf',
+    text: '#80838a',
   },
-  space: [0, 2, 4, 8, 16, 32, 64, 128, 256],
+  space: [0, 2, 4, 5, 8, 16, 32, 64, 128, 256],
+
   fonts: {
     body: 'system-ui, sans-serif',
     heading: 'system-ui, sans-serif',
@@ -30,11 +34,11 @@ export const theme = {
   },
   borders: {
     none: 'none',
-    normal: '1px solid #4ecdc4',
+    normal: '1px solid #cecece',
   },
   radius: {
     none: '0',
-    normal: '4px',
+    normal: '8px',
     round: '50%',
   },
   shadows: {
