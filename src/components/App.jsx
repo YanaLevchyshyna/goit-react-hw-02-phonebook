@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Form from './Form/Form';
 import { ContactsList } from './ContactsList/ContactsList';
 import { Filter } from './Filter/Filter';
-import { Title } from './App.styled';
+import { Container, Title } from './App.styled';
 
 class App extends Component {
   state = {
@@ -60,7 +60,7 @@ class App extends Component {
     const contactBySearch = this.getContactBySearch();
 
     return (
-      <div>
+      <Container>
         <Title>Phonebook</Title>
         <Form onSubmit={this.onAddContact} />
         <Filter value={filter} onChange={this.onSearchFieldChange} />
@@ -68,7 +68,7 @@ class App extends Component {
           contacts={contactBySearch}
           onDelete={this.deleteContact}
         />
-      </div>
+      </Container>
     );
   }
 }
